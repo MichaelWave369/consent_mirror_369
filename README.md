@@ -24,6 +24,8 @@ It helps people notice when a request, offer, argument, or conversation feels ru
 - Mobile-friendly responsive layout
 - Accessibility notes and v1.0 release checklist
 - Release verification workflow
+- MIT license
+- Security and safety policy
 - Framework docs
 - JSON data seeds for future app growth
 - GitHub Pages deployment workflow
@@ -104,6 +106,14 @@ A pattern is not proof. It is a cue to slow down.
 
 If there is immediate danger, threats, stalking, coercive control, self-harm risk, or fear for physical safety, prioritize trusted support, local emergency services, or qualified professional help.
 
+## Security and safety policy
+
+See `SECURITY.md` for security reporting, safety concerns, and privacy reminders.
+
+## License
+
+MIT License. See `LICENSE` for details.
+
 ## Repo map
 
 ```text
@@ -137,6 +147,8 @@ Completed:
 - Added public launch post draft
 - Added changelog
 - Added release process docs
+- Added MIT license
+- Added security and safety policy
 - Added `release:check` script
 - Added verification workflow
 - Added validation for JSON data
