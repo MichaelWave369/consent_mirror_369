@@ -13,6 +13,8 @@ It helps people notice when a request, offer, argument, or conversation feels ru
 - The 17 Mirror Sentences loaded from JSON
 - Consent check prompts
 - Boundary response examples
+- Local-only reflection log using browser storage
+- Reflection export as JSON
 - Framework docs
 - JSON data seeds for future app growth
 - GitHub Pages deployment workflow
@@ -49,6 +51,10 @@ To enable Pages:
 3. Set Source to GitHub Actions.
 4. Run the deploy workflow or push to `main`.
 
+## Privacy model
+
+The reflection log is local-first. Entries are saved only in the user's browser through local storage. The app includes export and clear controls so the user can keep or remove their own reflections.
+
 ## Project boundaries
 
 ConsentMirror369 is an education and reflection project. It does not diagnose people, prove intent, replace therapy, replace legal advice, or guarantee safety.
@@ -69,7 +75,7 @@ src/        React prototype app
 
 ## Current status
 
-v0.3 prototype.
+v0.4 prototype.
 
 Completed:
 
@@ -77,15 +83,17 @@ Completed:
 - Added phrase analyzer
 - Added 17 Mirror Sentences
 - Moved cards and signal rules into JSON data files
+- Added local-only reflection log
+- Added reflection export and clear controls
 - Added validation for JSON data
 - Added roadmap and contribution guide
 
 Next planned work:
 
-- Add local-only reflection log
 - Add printable card deck export
 - Improve mobile layout and visual identity
 - Add examples for family, faith, workplace, online, sales, and relationships
+- Add guided response builder
 
 ## Project vow
 
