@@ -17,6 +17,7 @@ Use this before announcing ConsentMirror369 publicly.
 - [ ] Reflections save locally.
 - [ ] Reflections export as JSON.
 - [ ] Reflections import from JSON.
+- [ ] Duplicate reflections are skipped during import.
 - [ ] Clear log works.
 - [ ] Printable deck opens and prints/saves as PDF.
 
