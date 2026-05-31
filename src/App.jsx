@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from 'react'
 import mirrorSentences from '../data/mirror_sentences.json'
 import signalRules from '../data/signal_rules.json'
+import scenarios from '../data/scenarios.json'
 import { printCardDeck } from './printDeck.js'
 import { colors, layout } from './theme.js'
 
@@ -45,19 +46,27 @@ function Eyebrow({ children }) {
 export default function App() {
   const importInputRef = useRef(null)
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [scenarioIndex, setScenarioIndex] = useState(0)
   const [search, setSearch] = useState('')
+  const [scenarioFilter, setScenarioFilter] = useState('all')
   const [phrase, setPhrase] = useState('If you cared about me, you would decide today.')
   const [choice, setChoice] = useState('I can care and still slow down before deciding.')
   const [reflections, setReflections] = useState(loadReflections)
   const [importStatus, setImportStatus] = useState('')
 
   const selected = mirrorSentences[selectedIndex]
+  const selectedScenario = scenarios[scenarioIndex]
   const analysis = useMemo(() => analyzePhrase(phrase), [phrase])
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim()
     if (!q) return mirrorSentences
     return mirrorSentences.filter(item => [item.phrase, item.pattern, item.question, item.response].join(' ').toLowerCase().includes(q))
   }, [search])
+  const scenarioCategories = useMemo(() => ['all', ...new Set(scenarios.map(item => item.category))], [])
+  const visibleScenarios = useMemo(() => {
+    if (scenarioFilter === 'all') return scenarios
+    return scenarios.filter(item => item.category === scenarioFilter)
+  }, [scenarioFilter])
 
   const primaryPattern = analysis[0]?.pattern || selected.pattern
 
@@ -114,11 +123,18 @@ export default function App() {
     reader.readAsText(file)
   }
 
+  function loadScenario(item) {
+    setPhrase(item.sample_phrase)
+    setChoice(item.gentle_response)
+    const nextIndex = scenarios.findIndex(scenario => scenario.id === item.id)
+    if (nextIndex >= 0) setScenarioIndex(nextIndex)
+  }
+
   return (
     <main style={layout.shell}>
       <div style={layout.container}>
         <section style={layout.hero}>
-          <Eyebrow>ConsentMirror369 v0.7 · Lantern, not weapon</Eyebrow>
+          <Eyebrow>ConsentMirror369 v0.8 · Lantern, not weapon</Eyebrow>
           <h1 style={{ fontSize: 'clamp(42px, 7vw, 78px)', lineHeight: 0.95, letterSpacing: '-0.06em', margin: 0 }}>Pressure literacy for clearer choice.</h1>
           <p style={{ fontSize: 18, lineHeight: 1.6, maxWidth: 820, color: colors.softInk }}>
             A humane framework for noticing pressure, naming patterns, pausing safely, and returning to consent without paranoia or counter-control.
@@ -169,10 +185,52 @@ export default function App() {
         </section>
 
         <section style={{ ...layout.card, marginTop: 18 }}>
-          <Eyebrow>Teaching deck</Eyebrow>
-          <h2>Printable 17-card deck</h2>
-          <p style={{ color: colors.softInk }}>Open the 17 Mirror Sentences as printable cards. Use your browser print dialog to print or save as PDF.</p>
-          <button onClick={() => printCardDeck(mirrorSentences)} style={layout.buttonPrimary}>Print / Save PDF deck</button>
+          <Eyebrow>Practice scenarios</Eyebrow>
+          <h2>Learn through real-life contexts</h2>
+          <p style={{ color: colors.softInk }}>Practice with family, faith, workplace, online, sales, and relationship situations. Each scenario can be loaded into the analyzer and reflection log.</p>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 14 }}>
+            {scenarioCategories.map(category => (
+              <button
+                key={category}
+                onClick={() => setScenarioFilter(category)}
+                style={category === scenarioFilter ? layout.buttonPrimary : layout.buttonSoft}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 12 }}>
+            {visibleScenarios.map(item => (
+              <article key={item.id} style={{ padding: 16, borderRadius: 18, background: colors.paper, border: `1px solid ${colors.softBorder}` }}>
+                <strong>{item.title}</strong>
+                <p style={{ color: colors.softInk }}>{item.situation}</p>
+                <p><em>{item.sample_phrase}</em></p>
+                <button onClick={() => loadScenario(item)} style={layout.buttonSoft}>Load scenario</button>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section style={layout.grid}>
+          <div style={layout.card}>
+            <Eyebrow>Scenario mirror</Eyebrow>
+            <h2>{selectedScenario.title}</h2>
+            <p style={{ color: colors.softInk }}>{selectedScenario.situation}</p>
+            <p><strong>Sample phrase:</strong> {selectedScenario.sample_phrase}</p>
+            <p><strong>Possible patterns:</strong> {selectedScenario.possible_patterns.join(', ')}</p>
+            <h3>Mirror questions</h3>
+            <ul style={{ lineHeight: 1.8, paddingLeft: 20 }}>
+              {selectedScenario.mirror_questions.map(question => <li key={question}>{question}</li>)}
+            </ul>
+            <p><strong>Gentle response:</strong> {selectedScenario.gentle_response}</p>
+          </div>
+
+          <div style={{ ...layout.card, background: colors.paper }}>
+            <Eyebrow>Teaching deck</Eyebrow>
+            <h2>Printable 17-card deck</h2>
+            <p style={{ color: colors.softInk }}>Open the 17 Mirror Sentences as printable cards. Use your browser print dialog to print or save as PDF.</p>
+            <button onClick={() => printCardDeck(mirrorSentences)} style={layout.buttonPrimary}>Print / Save PDF deck</button>
+          </div>
         </section>
 
         <section style={{ ...layout.card, marginTop: 18 }}>
