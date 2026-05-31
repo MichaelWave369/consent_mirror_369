@@ -1,0 +1,38 @@
+[
+  {
+    "id": "gentle_pause",
+    "tone": "gentle",
+    "label": "Gentle pause",
+    "template": "I care about this, and I need a little time to think before I answer."
+  },
+  {
+    "id": "clear_pause",
+    "tone": "clear",
+    "label": "Clear pause",
+    "template": "I am not ready to decide right now. I need time to think clearly."
+  },
+  {
+    "id": "firm_boundary",
+    "tone": "firm",
+    "label": "Firm boundary",
+    "template": "I am not comfortable making this decision under pressure. I will respond when I feel clear."
+  },
+  {
+    "id": "evidence_request",
+    "tone": "curious",
+    "label": "Evidence request",
+    "template": "I am open to understanding this better. Can you show me the evidence without needing me to agree right away?"
+  },
+  {
+    "id": "care_with_boundary",
+    "tone": "warm",
+    "label": "Care with boundary",
+    "template": "I care about you, and I still need my choice to be respected."
+  },
+  {
+    "id": "exit_line",
+    "tone": "safety",
+    "label": "Exit line",
+    "template": "This conversation does not feel healthy right now. I am going to step away and come back when things are calmer."
+  }
+]
