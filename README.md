@@ -19,6 +19,7 @@ It helps people notice when a request, offer, argument, or conversation feels ru
 - Reflection export and import as JSON
 - Duplicate-aware reflection imports
 - Printable card deck flow through the browser print dialog
+- Printable card backs with CM369 deck identity
 - Shared visual theme tokens
 - Mobile-friendly responsive layout
 - Accessibility notes and v1.0 release checklist
@@ -64,7 +65,9 @@ The app includes practice scenarios that can be loaded into the analyzer and ref
 
 ## Printable deck
 
-The app includes a **Print / Save PDF deck** button. It opens the 17 Mirror Sentences as printable cards. Use the browser print dialog to print or choose **Save as PDF**.
+The app includes a **Print / Save PDF deck** button. It opens the 17 Mirror Sentences as printable cards with matching card backs. Use the browser print dialog to print or choose **Save as PDF**.
+
+Card deck visual direction is documented in `docs/CARD_DECK_VISUAL_IDENTITY.md`.
 
 ## v1.0 release docs
 
@@ -125,7 +128,8 @@ Completed:
 - Added guided response builder
 - Added local-only reflection log
 - Added reflection export, import, clear, and duplicate-skip controls
-- Added printable card deck flow
+- Added printable card deck flow with matching card backs
+- Added card deck visual identity notes
 - Added shared theme tokens and responsive visual pass
 - Added accessibility notes
 - Added v1.0 release checklist
