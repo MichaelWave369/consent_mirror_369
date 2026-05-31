@@ -1,0 +1,27 @@
+{
+  "title": "ConsentMirror369",
+  "upload_type": "software",
+  "description": "ConsentMirror369 is a humane pressure-literacy and consent-awareness tool for recognizing pressure patterns, pausing before rushed decisions, and returning to clearer consent. It is designed as a lantern, not a weapon: a local-first reflection tool with safety boundaries, privacy notes, a phrase analyzer, guided response builder, reflection log, and printable teaching deck.",
+  "creators": [
+    {
+      "name": "Hughes, Michael W.",
+      "affiliation": "PHI369 Labs / Parallax"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "consent",
+    "pressure literacy",
+    "reflection",
+    "local-first",
+    "safety literacy",
+    "boundary support"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/MichaelWave369/consent_mirror_369",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}
