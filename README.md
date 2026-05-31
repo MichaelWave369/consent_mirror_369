@@ -11,6 +11,7 @@ It helps people notice when a request, offer, argument, or conversation feels ru
 - A React and Vite prototype app
 - A data-driven phrase analyzer for common pressure signals
 - The 17 Mirror Sentences loaded from JSON
+- Real-world scenario examples for family, faith, workplace, online, sales, and relationships
 - Consent check prompts
 - Boundary response examples
 - Local-only reflection log using browser storage
@@ -42,6 +43,10 @@ npm run dev
 npm run validate:data
 npm run build
 ```
+
+## Scenario examples
+
+The app includes practice scenarios that can be loaded into the analyzer and reflection log. Scenarios live in `data/scenarios.json` and are documented in `docs/SCENARIO_EXAMPLES.md`.
 
 ## Printable deck
 
@@ -84,7 +89,7 @@ src/        React prototype app
 
 ## Current status
 
-v0.7 prototype.
+v0.8 prototype.
 
 Completed:
 
@@ -92,6 +97,7 @@ Completed:
 - Added phrase analyzer
 - Added 17 Mirror Sentences
 - Moved cards and signal rules into JSON data files
+- Added real-world scenario examples and scenario browser
 - Added local-only reflection log
 - Added reflection export, import, and clear controls
 - Added printable card deck flow
@@ -101,10 +107,10 @@ Completed:
 
 Next planned work:
 
-- Add examples for family, faith, workplace, online, sales, and relationships
 - Add guided response builder
 - Add card deck backs / visual identity
 - Add accessibility pass
+- Add duplicate detection for imported reflections
 
 ## Project vow
 
