@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from 'react'
 import mirrorSentences from '../data/mirror_sentences.json'
 import signalRules from '../data/signal_rules.json'
 import scenarios from '../data/scenarios.json'
+import responseTemplates from '../data/response_templates.json'
 import { printCardDeck } from './printDeck.js'
 import { colors, layout } from './theme.js'
 
@@ -49,6 +50,7 @@ export default function App() {
   const [scenarioIndex, setScenarioIndex] = useState(0)
   const [search, setSearch] = useState('')
   const [scenarioFilter, setScenarioFilter] = useState('all')
+  const [selectedTemplateId, setSelectedTemplateId] = useState(responseTemplates[0]?.id || '')
   const [phrase, setPhrase] = useState('If you cared about me, you would decide today.')
   const [choice, setChoice] = useState('I can care and still slow down before deciding.')
   const [reflections, setReflections] = useState(loadReflections)
@@ -56,6 +58,7 @@ export default function App() {
 
   const selected = mirrorSentences[selectedIndex]
   const selectedScenario = scenarios[scenarioIndex]
+  const selectedTemplate = responseTemplates.find(item => item.id === selectedTemplateId) || responseTemplates[0]
   const analysis = useMemo(() => analyzePhrase(phrase), [phrase])
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim()
@@ -130,11 +133,17 @@ export default function App() {
     if (nextIndex >= 0) setScenarioIndex(nextIndex)
   }
 
+  function useTemplate() {
+    if (!selectedTemplate) return
+    setChoice(selectedTemplate.template)
+    setImportStatus(`Loaded ${selectedTemplate.label} response.`)
+  }
+
   return (
     <main style={layout.shell}>
       <div style={layout.container}>
         <section style={layout.hero}>
-          <Eyebrow>ConsentMirror369 v0.8 · Lantern, not weapon</Eyebrow>
+          <Eyebrow>ConsentMirror369 v0.9 · Lantern, not weapon</Eyebrow>
           <h1 style={{ fontSize: 'clamp(42px, 7vw, 78px)', lineHeight: 0.95, letterSpacing: '-0.06em', margin: 0 }}>Pressure literacy for clearer choice.</h1>
           <p style={{ fontSize: 18, lineHeight: 1.6, maxWidth: 820, color: colors.softInk }}>
             A humane framework for noticing pressure, naming patterns, pausing safely, and returning to consent without paranoia or counter-control.
@@ -190,13 +199,7 @@ export default function App() {
           <p style={{ color: colors.softInk }}>Practice with family, faith, workplace, online, sales, and relationship situations. Each scenario can be loaded into the analyzer and reflection log.</p>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 14 }}>
             {scenarioCategories.map(category => (
-              <button
-                key={category}
-                onClick={() => setScenarioFilter(category)}
-                style={category === scenarioFilter ? layout.buttonPrimary : layout.buttonSoft}
-              >
-                {category}
-              </button>
+              <button key={category} onClick={() => setScenarioFilter(category)} style={category === scenarioFilter ? layout.buttonPrimary : layout.buttonSoft}>{category}</button>
             ))}
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 12 }}>
@@ -234,25 +237,35 @@ export default function App() {
         </section>
 
         <section style={{ ...layout.card, marginTop: 18 }}>
+          <Eyebrow>Guided response builder</Eyebrow>
+          <h2>Build a calm boundary response</h2>
+          <p style={{ color: colors.softInk }}>Choose a tone, load a starter response, then edit it before saving to your local reflection log.</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12 }}>
+            <label style={{ display: 'grid', gap: 8 }}>
+              Response tone
+              <select value={selectedTemplateId} onChange={event => setSelectedTemplateId(event.target.value)} style={layout.field}>
+                {responseTemplates.map(template => (
+                  <option key={template.id} value={template.id}>{template.label}</option>
+                ))}
+              </select>
+            </label>
+            <div style={{ padding: 14, borderRadius: 16, background: colors.paper, border: `1px solid ${colors.softBorder}` }}>
+              <strong>{selectedTemplate?.tone}</strong>
+              <p style={{ marginBottom: 0 }}>{selectedTemplate?.template}</p>
+            </div>
+          </div>
+          <button onClick={useTemplate} style={{ ...layout.buttonPrimary, marginTop: 12 }}>Use this response</button>
+        </section>
+
+        <section style={{ ...layout.card, marginTop: 18 }}>
           <Eyebrow>Private practice</Eyebrow>
           <h2>Local-only reflection log</h2>
           <p style={{ color: colors.softInk }}>Saved only in this browser through local storage. You can export, import, or clear it any time.</p>
           <label style={{ display: 'grid', gap: 8, marginBottom: 12 }}>
             What do I choose when I slow down?
-            <textarea
-              value={choice}
-              onChange={event => setChoice(event.target.value)}
-              rows={3}
-              style={layout.field}
-            />
+            <textarea value={choice} onChange={event => setChoice(event.target.value)} rows={3} style={layout.field} />
           </label>
-          <input
-            ref={importInputRef}
-            type="file"
-            accept="application/json,.json"
-            onChange={handleImport}
-            style={{ display: 'none' }}
-          />
+          <input ref={importInputRef} type="file" accept="application/json,.json" onChange={handleImport} style={{ display: 'none' }} />
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
             <button onClick={addReflection} style={layout.buttonPrimary}>Save reflection</button>
             <button onClick={exportReflections} disabled={reflections.length === 0} style={layout.buttonSoft}>Export JSON</button>
@@ -261,9 +274,7 @@ export default function App() {
           </div>
           {importStatus && <p style={{ color: colors.softInk }}>{importStatus}</p>}
           <div style={{ ...layout.stack, marginTop: 14 }}>
-            {reflections.length === 0 ? (
-              <p>No saved reflections yet.</p>
-            ) : reflections.map(item => (
+            {reflections.length === 0 ? <p>No saved reflections yet.</p> : reflections.map(item => (
               <article key={item.id} style={{ padding: 14, borderRadius: 16, background: colors.paper, border: `1px solid ${colors.softBorder}` }}>
                 <strong>{item.pattern}</strong>
                 <p><em>{item.phrase}</em></p>
@@ -278,24 +289,11 @@ export default function App() {
           <div style={layout.card}>
             <Eyebrow>Browse</Eyebrow>
             <h2>The 17 Mirror Sentences</h2>
-            <input
-              value={search}
-              onChange={event => setSearch(event.target.value)}
-              placeholder="Search phrases or patterns"
-              style={{ ...layout.field, marginBottom: 12 }}
-            />
+            <input value={search} onChange={event => setSearch(event.target.value)} placeholder="Search phrases or patterns" style={{ ...layout.field, marginBottom: 12 }} />
             <div style={layout.stack}>
               {filtered.map(item => {
                 const realIndex = mirrorSentences.findIndex(card => card.id === item.id)
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => setSelectedIndex(realIndex)}
-                    style={{ textAlign: 'left', padding: 12, borderRadius: 14, border: `1px solid ${colors.border}`, background: realIndex === selectedIndex ? '#f2e6c9' : colors.paper, cursor: 'pointer' }}
-                  >
-                    {item.phrase}
-                  </button>
-                )
+                return <button key={item.id} onClick={() => setSelectedIndex(realIndex)} style={{ textAlign: 'left', padding: 12, borderRadius: 14, border: `1px solid ${colors.border}`, background: realIndex === selectedIndex ? '#f2e6c9' : colors.paper, cursor: 'pointer' }}>{item.phrase}</button>
               })}
             </div>
           </div>
