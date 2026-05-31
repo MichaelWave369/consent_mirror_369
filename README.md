@@ -22,6 +22,7 @@ It helps people notice when a request, offer, argument, or conversation feels ru
 - Shared visual theme tokens
 - Mobile-friendly responsive layout
 - Accessibility notes and v1.0 release checklist
+- Release verification workflow
 - Framework docs
 - JSON data seeds for future app growth
 - GitHub Pages deployment workflow
@@ -41,6 +42,12 @@ npm run dev
 ```
 
 ## Validate and build
+
+```bash
+npm run release:check
+```
+
+This runs:
 
 ```bash
 npm run validate:data
@@ -63,6 +70,7 @@ The app includes a **Print / Save PDF deck** button. It opens the 17 Mirror Sent
 
 Before public launch, use:
 
+- `docs/RELEASE_PROCESS.md`
 - `docs/V1_RELEASE_CHECKLIST.md`
 - `docs/V1_RELEASE_NOTES.md`
 - `docs/PUBLIC_LAUNCH_POST.md`
@@ -100,12 +108,12 @@ docs/       Framework notes and safety boundaries
 data/       JSON seed data
 scripts/    Data validation script
 src/        React prototype app
-.github/    GitHub Pages workflow
+.github/    GitHub Pages and verification workflows
 ```
 
 ## Current status
 
-v1.0 release candidate prep.
+v1.0.0-rc.1 release candidate prep.
 
 Completed:
 
@@ -123,13 +131,16 @@ Completed:
 - Added v1.0 release checklist
 - Added v1.0 release notes draft
 - Added public launch post draft
+- Added release process docs
+- Added `release:check` script
+- Added verification workflow
 - Added validation for JSON data
 - Added roadmap and contribution guide
 
 Next planned work:
 
-- Run build/deploy verification
-- Add card deck backs / visual identity
+- Confirm GitHub Actions verification passes
+- Confirm GitHub Pages deploys
 - Prepare final v1.0 tag/release
 
 ## Project vow
