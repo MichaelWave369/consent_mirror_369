@@ -2,15 +2,32 @@ import { useMemo, useState } from 'react'
 import mirrorSentences from '../data/mirror_sentences.json'
 import signalRules from '../data/signal_rules.json'
 
+const STORAGE_KEY = 'consentmirror369.reflections.v1'
+
 function analyzePhrase(text) {
   const lower = text.toLowerCase()
   return signalRules.filter(rule => rule.words.some(word => lower.includes(word)))
+}
+
+function loadReflections() {
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY)
+    return raw ? JSON.parse(raw) : []
+  } catch {
+    return []
+  }
+}
+
+function saveReflections(items) {
+  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
 }
 
 export default function App() {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [search, setSearch] = useState('')
   const [phrase, setPhrase] = useState('If you cared about me, you would decide today.')
+  const [choice, setChoice] = useState('I can care and still slow down before deciding.')
+  const [reflections, setReflections] = useState(loadReflections)
 
   const selected = mirrorSentences[selectedIndex]
   const analysis = useMemo(() => analyzePhrase(phrase), [phrase])
@@ -20,11 +37,41 @@ export default function App() {
     return mirrorSentences.filter(item => [item.phrase, item.pattern, item.question, item.response].join(' ').toLowerCase().includes(q))
   }, [search])
 
+  const primaryPattern = analysis[0]?.pattern || selected.pattern
+
+  function addReflection() {
+    const entry = {
+      id: crypto.randomUUID(),
+      createdAt: new Date().toISOString(),
+      phrase: phrase.trim(),
+      pattern: primaryPattern,
+      choice: choice.trim()
+    }
+    const next = [entry, ...reflections]
+    setReflections(next)
+    saveReflections(next)
+  }
+
+  function clearReflections() {
+    setReflections([])
+    saveReflections([])
+  }
+
+  function exportReflections() {
+    const blob = new Blob([JSON.stringify(reflections, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = 'consentmirror369-reflections.json'
+    link.click()
+    URL.revokeObjectURL(url)
+  }
+
   return (
     <main style={{ minHeight: '100vh', padding: 24, background: '#f7f3ea', color: '#182018' }}>
       <div style={{ maxWidth: 1120, margin: '0 auto' }}>
         <section style={{ padding: 24, border: '1px solid #ddd4c0', borderRadius: 24, background: '#fffaf0' }}>
-          <p style={{ textTransform: 'uppercase', letterSpacing: 2, fontWeight: 800, color: '#65734e' }}>ConsentMirror369 v0.3</p>
+          <p style={{ textTransform: 'uppercase', letterSpacing: 2, fontWeight: 800, color: '#65734e' }}>ConsentMirror369 v0.4</p>
           <h1 style={{ fontSize: 'clamp(40px, 7vw, 72px)', lineHeight: 1, margin: 0 }}>Pressure literacy for clearer choice.</h1>
           <p style={{ fontSize: 18, lineHeight: 1.6, maxWidth: 780 }}>
             A humane framework for noticing pressure, naming patterns, pausing safely, and returning to consent.
@@ -64,6 +111,37 @@ export default function App() {
               <li>Can I slow down without losing care or respect?</li>
               <li>Would this still feel right without fear, guilt, urgency, or shame?</li>
             </ul>
+          </div>
+        </section>
+
+        <section style={{ marginTop: 18, padding: 20, border: '1px solid #ddd4c0', borderRadius: 20, background: 'white' }}>
+          <h2>Local-only reflection log</h2>
+          <p style={{ color: '#596459' }}>Saved only in this browser through local storage. You can export or clear it any time.</p>
+          <label style={{ display: 'grid', gap: 8, marginBottom: 12 }}>
+            What do I choose when I slow down?
+            <textarea
+              value={choice}
+              onChange={event => setChoice(event.target.value)}
+              rows={3}
+              style={{ width: '100%', padding: 12, borderRadius: 12, border: '1px solid #ddd4c0' }}
+            />
+          </label>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+            <button onClick={addReflection} style={{ padding: '10px 14px', borderRadius: 12, border: '1px solid #65734e', background: '#65734e', color: 'white', cursor: 'pointer' }}>Save reflection</button>
+            <button onClick={exportReflections} disabled={reflections.length === 0} style={{ padding: '10px 14px', borderRadius: 12, border: '1px solid #ddd4c0', background: '#fffaf0', cursor: 'pointer' }}>Export JSON</button>
+            <button onClick={clearReflections} disabled={reflections.length === 0} style={{ padding: '10px 14px', borderRadius: 12, border: '1px solid #ddd4c0', background: '#fffaf0', cursor: 'pointer' }}>Clear log</button>
+          </div>
+          <div style={{ display: 'grid', gap: 10, marginTop: 14 }}>
+            {reflections.length === 0 ? (
+              <p>No saved reflections yet.</p>
+            ) : reflections.map(item => (
+              <article key={item.id} style={{ padding: 14, borderRadius: 14, background: '#fffaf0', border: '1px solid #eee1c7' }}>
+                <strong>{item.pattern}</strong>
+                <p><em>{item.phrase}</em></p>
+                <p>{item.choice}</p>
+                <small>{new Date(item.createdAt).toLocaleString()}</small>
+              </article>
+            ))}
           </div>
         </section>
 
