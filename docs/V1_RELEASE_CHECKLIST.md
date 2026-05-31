@@ -25,6 +25,7 @@ Use this before announcing ConsentMirror369 publicly.
 
 - [ ] README includes project boundaries.
 - [ ] Safety notes are visible in docs.
+- [ ] `SECURITY.md` is present.
 - [ ] No content teaches control, coercion, revenge, or counter-manipulation.
 - [ ] Emergency/danger language points users toward trusted support.
 
