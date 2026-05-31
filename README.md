@@ -9,8 +9,8 @@ It helps people notice when a request, offer, argument, or conversation feels ru
 ## What is included
 
 - A React and Vite prototype app
-- A phrase analyzer for common pressure signals
-- The 17 Mirror Sentences
+- A data-driven phrase analyzer for common pressure signals
+- The 17 Mirror Sentences loaded from JSON
 - Consent check prompts
 - Boundary response examples
 - Framework docs
@@ -69,11 +69,19 @@ src/        React prototype app
 
 ## Current status
 
-v0.2 prototype.
+v0.3 prototype.
+
+Completed:
+
+- Created working React app
+- Added phrase analyzer
+- Added 17 Mirror Sentences
+- Moved cards and signal rules into JSON data files
+- Added validation for JSON data
+- Added roadmap and contribution guide
 
 Next planned work:
 
-- Move app content fully into JSON-driven data
 - Add local-only reflection log
 - Add printable card deck export
 - Improve mobile layout and visual identity
