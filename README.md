@@ -10,13 +10,13 @@ It helps people notice when a request, offer, argument, or conversation feels ru
 
 **Latest release:** [ConsentMirror369 v1.0.0 — Lantern, Not Weapon](https://github.com/MichaelWave369/consent_mirror_369/releases/tag/v1.0.0)
 
-**Status:** v1.0.0 released.
+**Status:** v1.0.1 metadata release prepared for Zenodo pickup.
 
 ## Zenodo / DOI status
 
-Zenodo DOI archival is pending until the repository is connected and enabled in Zenodo.
+Zenodo DOI archival is prepared with `CITATION.cff` and `.zenodo.json` metadata.
 
-Once Zenodo has archived the release and minted a DOI, add the DOI badge and citation link here.
+After the repository is enabled in Zenodo, publish a new GitHub release tagged `v1.0.1` so Zenodo can archive it and mint a DOI. Once Zenodo has archived the release and minted a DOI, add the DOI badge and citation link here.
 
 ## What is included
 
@@ -34,6 +34,8 @@ Once Zenodo has archived the release and minted a DOI, add the DOI badge and cit
 - Printable card backs with CM369 deck identity
 - Shared visual theme tokens
 - Mobile-friendly responsive layout
+- Citation metadata through `CITATION.cff`
+- Zenodo metadata through `.zenodo.json`
 - Accessibility notes and v1.0 release checklist
 - Release verification workflow
 - MIT license
@@ -83,13 +85,14 @@ The app includes a **Print / Save PDF deck** button. It opens the 17 Mirror Sent
 
 Card deck visual direction is documented in `docs/CARD_DECK_VISUAL_IDENTITY.md`.
 
-## v1.0 release docs
+## Release docs
 
-Before public launch, use:
+Before public launch or follow-up releases, use:
 
 - `docs/RELEASE_PROCESS.md`
 - `docs/V1_RELEASE_CHECKLIST.md`
 - `docs/V1_RELEASE_NOTES.md`
+- `docs/V1_0_1_RELEASE_NOTES.md`
 - `docs/PUBLIC_LAUNCH_POST.md`
 - `docs/ACCESSIBILITY_NOTES.md`
 
@@ -138,7 +141,7 @@ src/        React prototype app
 
 ## Current status
 
-v1.0.0 released.
+v1.0.1 metadata release prepared for Zenodo.
 
 Completed:
 
@@ -156,6 +159,9 @@ Completed:
 - Added accessibility notes
 - Added v1.0 release checklist
 - Added v1.0 release notes
+- Added v1.0.1 release notes
+- Added citation metadata
+- Added Zenodo metadata
 - Added public launch post draft
 - Added changelog
 - Added release process docs
@@ -169,9 +175,9 @@ Completed:
 
 Next planned work:
 
-- Connect and archive through Zenodo
+- Publish GitHub release `v1.0.1` after Zenodo is enabled
+- Confirm Zenodo archives the release and mints a DOI
 - Add Zenodo DOI badge after DOI is minted
-- Continue post-v1.0 polish and documentation
 
 ## Project vow
 
