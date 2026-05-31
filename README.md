@@ -15,6 +15,7 @@ It helps people notice when a request, offer, argument, or conversation feels ru
 - Boundary response examples
 - Local-only reflection log using browser storage
 - Reflection export and import as JSON
+- Printable card deck flow through the browser print dialog
 - Framework docs
 - JSON data seeds for future app growth
 - GitHub Pages deployment workflow
@@ -39,6 +40,10 @@ npm run dev
 npm run validate:data
 npm run build
 ```
+
+## Printable deck
+
+The app includes a **Print / Save PDF deck** button. It opens the 17 Mirror Sentences as printable cards. Use the browser print dialog to print or choose **Save as PDF**.
 
 ## GitHub Pages
 
@@ -77,7 +82,7 @@ src/        React prototype app
 
 ## Current status
 
-v0.5 prototype.
+v0.6 prototype.
 
 Completed:
 
@@ -87,15 +92,16 @@ Completed:
 - Moved cards and signal rules into JSON data files
 - Added local-only reflection log
 - Added reflection export, import, and clear controls
+- Added printable card deck flow
 - Added validation for JSON data
 - Added roadmap and contribution guide
 
 Next planned work:
 
-- Add printable card deck export
 - Improve mobile layout and visual identity
 - Add examples for family, faith, workplace, online, sales, and relationships
 - Add guided response builder
+- Add card deck backs / visual identity
 
 ## Project vow
 
