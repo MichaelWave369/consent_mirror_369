@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import mirrorSentences from '../data/mirror_sentences.json'
 import signalRules from '../data/signal_rules.json'
 
@@ -22,12 +22,28 @@ function saveReflections(items) {
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items))
 }
 
+function cleanImportedReflections(parsed) {
+  if (!Array.isArray(parsed)) {
+    throw new Error('Import file must contain an array of reflections.')
+  }
+
+  return parsed.map(item => ({
+    id: typeof item.id === 'string' ? item.id : crypto.randomUUID(),
+    createdAt: typeof item.createdAt === 'string' ? item.createdAt : new Date().toISOString(),
+    phrase: typeof item.phrase === 'string' ? item.phrase : '',
+    pattern: typeof item.pattern === 'string' ? item.pattern : 'Imported reflection',
+    choice: typeof item.choice === 'string' ? item.choice : ''
+  })).filter(item => item.phrase || item.choice)
+}
+
 export default function App() {
+  const importInputRef = useRef(null)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [search, setSearch] = useState('')
   const [phrase, setPhrase] = useState('If you cared about me, you would decide today.')
   const [choice, setChoice] = useState('I can care and still slow down before deciding.')
   const [reflections, setReflections] = useState(loadReflections)
+  const [importStatus, setImportStatus] = useState('')
 
   const selected = mirrorSentences[selectedIndex]
   const analysis = useMemo(() => analyzePhrase(phrase), [phrase])
@@ -50,11 +66,13 @@ export default function App() {
     const next = [entry, ...reflections]
     setReflections(next)
     saveReflections(next)
+    setImportStatus('Reflection saved locally.')
   }
 
   function clearReflections() {
     setReflections([])
     saveReflections([])
+    setImportStatus('Local reflection log cleared.')
   }
 
   function exportReflections() {
@@ -65,13 +83,36 @@ export default function App() {
     link.download = 'consentmirror369-reflections.json'
     link.click()
     URL.revokeObjectURL(url)
+    setImportStatus('Reflection log exported as JSON.')
+  }
+
+  function handleImport(event) {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    const reader = new FileReader()
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(String(reader.result || '[]'))
+        const cleaned = cleanImportedReflections(parsed)
+        const next = [...cleaned, ...reflections]
+        setReflections(next)
+        saveReflections(next)
+        setImportStatus(`Imported ${cleaned.length} reflection${cleaned.length === 1 ? '' : 's'} locally.`)
+      } catch (error) {
+        setImportStatus(error instanceof Error ? error.message : 'Could not import that file.')
+      } finally {
+        event.target.value = ''
+      }
+    }
+    reader.readAsText(file)
   }
 
   return (
     <main style={{ minHeight: '100vh', padding: 24, background: '#f7f3ea', color: '#182018' }}>
       <div style={{ maxWidth: 1120, margin: '0 auto' }}>
         <section style={{ padding: 24, border: '1px solid #ddd4c0', borderRadius: 24, background: '#fffaf0' }}>
-          <p style={{ textTransform: 'uppercase', letterSpacing: 2, fontWeight: 800, color: '#65734e' }}>ConsentMirror369 v0.4</p>
+          <p style={{ textTransform: 'uppercase', letterSpacing: 2, fontWeight: 800, color: '#65734e' }}>ConsentMirror369 v0.5</p>
           <h1 style={{ fontSize: 'clamp(40px, 7vw, 72px)', lineHeight: 1, margin: 0 }}>Pressure literacy for clearer choice.</h1>
           <p style={{ fontSize: 18, lineHeight: 1.6, maxWidth: 780 }}>
             A humane framework for noticing pressure, naming patterns, pausing safely, and returning to consent.
@@ -116,7 +157,7 @@ export default function App() {
 
         <section style={{ marginTop: 18, padding: 20, border: '1px solid #ddd4c0', borderRadius: 20, background: 'white' }}>
           <h2>Local-only reflection log</h2>
-          <p style={{ color: '#596459' }}>Saved only in this browser through local storage. You can export or clear it any time.</p>
+          <p style={{ color: '#596459' }}>Saved only in this browser through local storage. You can export, import, or clear it any time.</p>
           <label style={{ display: 'grid', gap: 8, marginBottom: 12 }}>
             What do I choose when I slow down?
             <textarea
@@ -126,11 +167,20 @@ export default function App() {
               style={{ width: '100%', padding: 12, borderRadius: 12, border: '1px solid #ddd4c0' }}
             />
           </label>
+          <input
+            ref={importInputRef}
+            type="file"
+            accept="application/json,.json"
+            onChange={handleImport}
+            style={{ display: 'none' }}
+          />
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
             <button onClick={addReflection} style={{ padding: '10px 14px', borderRadius: 12, border: '1px solid #65734e', background: '#65734e', color: 'white', cursor: 'pointer' }}>Save reflection</button>
             <button onClick={exportReflections} disabled={reflections.length === 0} style={{ padding: '10px 14px', borderRadius: 12, border: '1px solid #ddd4c0', background: '#fffaf0', cursor: 'pointer' }}>Export JSON</button>
+            <button onClick={() => importInputRef.current?.click()} style={{ padding: '10px 14px', borderRadius: 12, border: '1px solid #ddd4c0', background: '#fffaf0', cursor: 'pointer' }}>Import JSON</button>
             <button onClick={clearReflections} disabled={reflections.length === 0} style={{ padding: '10px 14px', borderRadius: 12, border: '1px solid #ddd4c0', background: '#fffaf0', cursor: 'pointer' }}>Clear log</button>
           </div>
+          {importStatus && <p style={{ color: '#596459' }}>{importStatus}</p>}
           <div style={{ display: 'grid', gap: 10, marginTop: 14 }}>
             {reflections.length === 0 ? (
               <p>No saved reflections yet.</p>
