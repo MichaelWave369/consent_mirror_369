@@ -1,6 +1,6 @@
 # ConsentMirror369 v1.0 Release Notes
 
-**Status:** v1.0 release candidate draft  
+**Status:** v1.0.0 ready  
 **Project type:** Humane pressure-literacy and consent-awareness tool
 
 ## Release summary
@@ -23,6 +23,8 @@ It is designed as a lantern, not a weapon. It does not teach people how to press
 - Privacy model documentation
 - Accessibility notes
 - v1.0 release checklist
+- Verification workflow
+- GitHub Pages deploy workflow
 
 ## Current data files
 
@@ -53,6 +55,12 @@ If there is immediate danger, threats, stalking, coercive control, self-harm ris
 
 The reflection log uses browser local storage. Reflections are not sent to a server by the app. Local storage is not encrypted, so anyone with access to the same browser profile may be able to view saved entries.
 
-## Launch reminder
+## Release verification
 
-Before public sharing, run the checklist in `docs/V1_RELEASE_CHECKLIST.md`.
+Before public sharing, run:
+
+```bash
+npm run release:check
+```
+
+And complete the checklist in `docs/V1_RELEASE_CHECKLIST.md`.
