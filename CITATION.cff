@@ -11,8 +11,9 @@ abstract: >-
 version: 1.0.1
 date-released: 2026-05-31
 license: MIT
+doi: 10.5281/zenodo.20479334
 repository-code: https://github.com/MichaelWave369/consent_mirror_369
-url: https://github.com/MichaelWave369/consent_mirror_369
+url: https://doi.org/10.5281/zenodo.20479334
 keywords:
   - consent
   - pressure-literacy
