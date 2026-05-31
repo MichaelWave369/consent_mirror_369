@@ -1,0 +1,10 @@
+[
+  {"id":"urgency_pressure","pattern":"Urgency pressure","words":["now","today","last chance","one chance","hurry","immediately"],"question":"What changes if I slow this decision down?"},
+  {"id":"guilt_pressure","pattern":"Guilt pressure","words":["after everything","owe","ungrateful","for me","least you could do"],"question":"Is appreciation being turned into obligation?"},
+  {"id":"identity_pressure","pattern":"Identity pressure","words":["real friend","real family","real believer","good person","loyal"],"question":"Is belonging being made conditional?"},
+  {"id":"love_pressure","pattern":"Love as pressure","words":["if you loved","if you cared","prove you love","prove you care"],"question":"Do I feel free to care and still say no?"},
+  {"id":"fear_pressure","pattern":"Fear pressure","words":["regret","sorry","bad things","or else","you will lose"],"question":"Is fear replacing clear information?"},
+  {"id":"secrecy_pressure","pattern":"Secrecy pressure","words":["do not tell","don't tell","keep this secret","between us"],"question":"Would this survive gentle outside light?"},
+  {"id":"evidence_bypass","pattern":"Evidence bypass","words":["trust me","believe me","no need to ask","because I said"],"question":"What information would help me decide clearly?"},
+  {"id":"false_binary","pattern":"False binary","words":["with us or against us","only two choices","either","or else"],"question":"What other options might be hidden?"}
+]
