@@ -14,7 +14,7 @@ It helps people notice when a request, offer, argument, or conversation feels ru
 - Consent check prompts
 - Boundary response examples
 - Local-only reflection log using browser storage
-- Reflection export as JSON
+- Reflection export and import as JSON
 - Framework docs
 - JSON data seeds for future app growth
 - GitHub Pages deployment workflow
@@ -53,7 +53,9 @@ To enable Pages:
 
 ## Privacy model
 
-The reflection log is local-first. Entries are saved only in the user's browser through local storage. The app includes export and clear controls so the user can keep or remove their own reflections.
+The reflection log is local-first. Entries are saved only in the user's browser through local storage. The app includes export, import, and clear controls so the user can keep, restore, or remove their own reflections.
+
+Local storage is not encrypted. Anyone with access to the same browser profile may be able to view saved entries.
 
 ## Project boundaries
 
@@ -75,7 +77,7 @@ src/        React prototype app
 
 ## Current status
 
-v0.4 prototype.
+v0.5 prototype.
 
 Completed:
 
@@ -84,7 +86,7 @@ Completed:
 - Added 17 Mirror Sentences
 - Moved cards and signal rules into JSON data files
 - Added local-only reflection log
-- Added reflection export and clear controls
+- Added reflection export, import, and clear controls
 - Added validation for JSON data
 - Added roadmap and contribution guide
 
