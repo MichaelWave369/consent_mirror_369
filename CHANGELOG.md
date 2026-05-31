@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.0.1
+
+Metadata release prepared for Zenodo archival.
+
+### Added
+
+- `CITATION.cff` citation metadata
+- `.zenodo.json` Zenodo metadata
+
+### Changed
+
+- Package version bumped to `1.0.1`
+
 ## v1.0.0
 
 First public release of ConsentMirror369.
