@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from 'react'
 import mirrorSentences from '../data/mirror_sentences.json'
 import signalRules from '../data/signal_rules.json'
+import { printCardDeck } from './printDeck.js'
 
 const STORAGE_KEY = 'consentmirror369.reflections.v1'
 
@@ -112,7 +113,7 @@ export default function App() {
     <main style={{ minHeight: '100vh', padding: 24, background: '#f7f3ea', color: '#182018' }}>
       <div style={{ maxWidth: 1120, margin: '0 auto' }}>
         <section style={{ padding: 24, border: '1px solid #ddd4c0', borderRadius: 24, background: '#fffaf0' }}>
-          <p style={{ textTransform: 'uppercase', letterSpacing: 2, fontWeight: 800, color: '#65734e' }}>ConsentMirror369 v0.5</p>
+          <p style={{ textTransform: 'uppercase', letterSpacing: 2, fontWeight: 800, color: '#65734e' }}>ConsentMirror369 v0.6</p>
           <h1 style={{ fontSize: 'clamp(40px, 7vw, 72px)', lineHeight: 1, margin: 0 }}>Pressure literacy for clearer choice.</h1>
           <p style={{ fontSize: 18, lineHeight: 1.6, maxWidth: 780 }}>
             A humane framework for noticing pressure, naming patterns, pausing safely, and returning to consent.
@@ -153,6 +154,12 @@ export default function App() {
               <li>Would this still feel right without fear, guilt, urgency, or shame?</li>
             </ul>
           </div>
+        </section>
+
+        <section style={{ marginTop: 18, padding: 20, border: '1px solid #ddd4c0', borderRadius: 20, background: 'white' }}>
+          <h2>Printable teaching deck</h2>
+          <p style={{ color: '#596459' }}>Open the 17 Mirror Sentences as a printable card deck. Use your browser print dialog to print or save as PDF.</p>
+          <button onClick={() => printCardDeck(mirrorSentences)} style={{ padding: '10px 14px', borderRadius: 12, border: '1px solid #65734e', background: '#65734e', color: 'white', cursor: 'pointer' }}>Print / Save PDF deck</button>
         </section>
 
         <section style={{ marginTop: 18, padding: 20, border: '1px solid #ddd4c0', borderRadius: 20, background: 'white' }}>
