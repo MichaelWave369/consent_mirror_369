@@ -1,0 +1,86 @@
+[
+  {
+    "id": "family_obligation_001",
+    "category": "family",
+    "title": "Family obligation pressure",
+    "situation": "A relative says you should agree because family always comes first.",
+    "sample_phrase": "Real family would do this without asking so many questions.",
+    "possible_patterns": ["Identity pressure", "Guilt pressure"],
+    "mirror_questions": [
+      "Can I love my family and still think clearly?",
+      "Is belonging being made conditional on automatic agreement?",
+      "What would care look like with consent included?"
+    ],
+    "gentle_response": "I care about this family. I still need room to think and choose clearly."
+  },
+  {
+    "id": "faith_fear_001",
+    "category": "faith",
+    "title": "Faith and fear pressure",
+    "situation": "Someone frames honest questions as proof that your faith or character is weak.",
+    "sample_phrase": "A real believer would not question this.",
+    "possible_patterns": ["Identity pressure", "Authority pressure"],
+    "mirror_questions": [
+      "Can sincere faith include honest questions?",
+      "Is this encouraging humility and truth, or fear of rejection?",
+      "Do I feel free to seek understanding?"
+    ],
+    "gentle_response": "My questions are part of seeking truth carefully. I want this conversation to leave room for conscience and humility."
+  },
+  {
+    "id": "workplace_family_language_001",
+    "category": "workplace",
+    "title": "Workplace family language",
+    "situation": "A workplace uses family language to ask for unsustainable sacrifice.",
+    "sample_phrase": "We are a family here, so everyone needs to sacrifice.",
+    "possible_patterns": ["Identity pressure", "Obligation pressure"],
+    "mirror_questions": [
+      "Are clear expectations being replaced with emotional language?",
+      "Would this request still seem fair without the family framing?",
+      "What boundary would make this sustainable?"
+    ],
+    "gentle_response": "I care about the team, and I also need clear expectations and sustainable boundaries."
+  },
+  {
+    "id": "online_hidden_enemy_001",
+    "category": "online",
+    "title": "Hidden enemy hook",
+    "situation": "A post uses a vague enemy and special knowledge to pull you into fear or isolation.",
+    "sample_phrase": "They do not want you to know this. Everyone else is asleep.",
+    "possible_patterns": ["Hidden enemy hook", "Isolation pressure"],
+    "mirror_questions": [
+      "Is this making me clearer, kinder, and more grounded?",
+      "What evidence can be checked outside this source?",
+      "Is this expanding my world or narrowing it?"
+    ],
+    "gentle_response": "I am willing to examine claims, but I need evidence, humility, and grounding."
+  },
+  {
+    "id": "sales_urgency_001",
+    "category": "sales",
+    "title": "Deadline sales pressure",
+    "situation": "A seller pushes a quick decision before you can compare or think.",
+    "sample_phrase": "This price is only available if you decide today.",
+    "possible_patterns": ["Urgency pressure", "Scarcity pressure"],
+    "mirror_questions": [
+      "Would this still make sense if I had time to compare options?",
+      "What information am I being rushed past?",
+      "What happens if I wait?"
+    ],
+    "gentle_response": "I do not make important decisions under deadline pressure. I will step back and compare options first."
+  },
+  {
+    "id": "relationship_love_test_001",
+    "category": "relationship",
+    "title": "Love as a test",
+    "situation": "Someone makes your love or care feel dependent on saying yes.",
+    "sample_phrase": "If you loved me, you would not need boundaries.",
+    "possible_patterns": ["Love as pressure", "Boundary pressure"],
+    "mirror_questions": [
+      "Does healthy love make room for boundaries?",
+      "Do I feel free to say no and still be cared for?",
+      "What would love look like with consent included?"
+    ],
+    "gentle_response": "I love you, and boundaries help love stay healthy. I will not give up my boundaries to prove care."
+  }
+]
