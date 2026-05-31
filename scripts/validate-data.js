@@ -1,6 +1,12 @@
 import fs from 'node:fs'
 
-const files = ['data/mirror_sentences.json', 'data/pressure_patterns.json', 'data/signal_rules.json', 'data/scenarios.json']
+const files = [
+  'data/mirror_sentences.json',
+  'data/pressure_patterns.json',
+  'data/signal_rules.json',
+  'data/scenarios.json',
+  'data/response_templates.json'
+]
 
 for (const file of files) {
   const raw = fs.readFileSync(file, 'utf8')
