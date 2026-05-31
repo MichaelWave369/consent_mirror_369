@@ -8,6 +8,37 @@ import { colors, layout } from './theme.js'
 
 const STORAGE_KEY = 'consentmirror369.reflections.v1'
 
+function normalize(value) {
+  return String(value || '').trim().toLowerCase().replace(/\s+/g, ' ')
+}
+
+function reflectionFingerprint(item) {
+  return [normalize(item.phrase), normalize(item.pattern), normalize(item.choice)].join('|')
+}
+
+function mergeWithoutDuplicates(incoming, existing) {
+  const seenIds = new Set(existing.map(item => item.id).filter(Boolean))
+  const seenFingerprints = new Set(existing.map(reflectionFingerprint))
+  const unique = []
+  let skipped = 0
+
+  for (const item of incoming) {
+    const fingerprint = reflectionFingerprint(item)
+    const duplicate = (item.id && seenIds.has(item.id)) || seenFingerprints.has(fingerprint)
+
+    if (duplicate) {
+      skipped += 1
+      continue
+    }
+
+    unique.push(item)
+    if (item.id) seenIds.add(item.id)
+    seenFingerprints.add(fingerprint)
+  }
+
+  return { unique, skipped }
+}
+
 function analyzePhrase(text) {
   const lower = text.toLowerCase()
   return signalRules.filter(rule => rule.words.some(word => lower.includes(word)))
@@ -113,10 +144,11 @@ export default function App() {
       try {
         const parsed = JSON.parse(String(reader.result || '[]'))
         const cleaned = cleanImportedReflections(parsed)
-        const next = [...cleaned, ...reflections]
+        const { unique, skipped } = mergeWithoutDuplicates(cleaned, reflections)
+        const next = [...unique, ...reflections]
         setReflections(next)
         saveReflections(next)
-        setImportStatus(`Imported ${cleaned.length} reflection${cleaned.length === 1 ? '' : 's'} locally.`)
+        setImportStatus(`Imported ${unique.length} reflection${unique.length === 1 ? '' : 's'} locally. Skipped ${skipped} duplicate${skipped === 1 ? '' : 's'}.`)
       } catch (error) {
         setImportStatus(error instanceof Error ? error.message : 'Could not import that file.')
       } finally {
@@ -142,13 +174,13 @@ export default function App() {
   return (
     <main style={layout.shell}>
       <div style={layout.container}>
-        <section style={layout.hero}>
-          <Eyebrow>ConsentMirror369 v0.9 · Lantern, not weapon</Eyebrow>
-          <h1 style={{ fontSize: 'clamp(42px, 7vw, 78px)', lineHeight: 0.95, letterSpacing: '-0.06em', margin: 0 }}>Pressure literacy for clearer choice.</h1>
+        <section style={layout.hero} aria-labelledby="hero-title">
+          <Eyebrow>ConsentMirror369 v1.0-prep · Lantern, not weapon</Eyebrow>
+          <h1 id="hero-title" style={{ fontSize: 'clamp(42px, 7vw, 78px)', lineHeight: 0.95, letterSpacing: '-0.06em', margin: 0 }}>Pressure literacy for clearer choice.</h1>
           <p style={{ fontSize: 18, lineHeight: 1.6, maxWidth: 820, color: colors.softInk }}>
             A humane framework for noticing pressure, naming patterns, pausing safely, and returning to consent without paranoia or counter-control.
           </p>
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 10 }}>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 10 }} aria-label="Core method steps">
             {['Notice', 'Name', 'Pause', 'Choose'].map(step => (
               <span key={step} style={{ padding: '8px 12px', borderRadius: 999, border: `1px solid ${colors.border}`, background: colors.white, color: colors.moss, fontWeight: 700 }}>{step}</span>
             ))}
@@ -159,15 +191,13 @@ export default function App() {
           <div style={layout.card}>
             <Eyebrow>Analyzer</Eyebrow>
             <h2>Try the phrase analyzer</h2>
-            <textarea
-              value={phrase}
-              onChange={event => setPhrase(event.target.value)}
-              rows={5}
-              style={layout.field}
-            />
+            <label style={{ display: 'grid', gap: 8 }}>
+              Phrase or situation
+              <textarea value={phrase} onChange={event => setPhrase(event.target.value)} rows={5} style={layout.field} />
+            </label>
             <p style={{ color: colors.softInk }}>This is a reflection cue, not a verdict about anyone's intent.</p>
             {analysis.length > 0 ? (
-              <div style={layout.stack}>
+              <div style={layout.stack} aria-label="Detected pressure cues">
                 {analysis.map(rule => (
                   <div key={rule.id} style={{ padding: 14, borderRadius: 16, background: colors.paper, border: `1px solid ${colors.softBorder}` }}>
                     <strong>{rule.pattern}</strong>
@@ -197,9 +227,9 @@ export default function App() {
           <Eyebrow>Practice scenarios</Eyebrow>
           <h2>Learn through real-life contexts</h2>
           <p style={{ color: colors.softInk }}>Practice with family, faith, workplace, online, sales, and relationship situations. Each scenario can be loaded into the analyzer and reflection log.</p>
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 14 }}>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 14 }} aria-label="Scenario category filters">
             {scenarioCategories.map(category => (
-              <button key={category} onClick={() => setScenarioFilter(category)} style={category === scenarioFilter ? layout.buttonPrimary : layout.buttonSoft}>{category}</button>
+              <button key={category} onClick={() => setScenarioFilter(category)} style={category === scenarioFilter ? layout.buttonPrimary : layout.buttonSoft} aria-pressed={category === scenarioFilter}>{category}</button>
             ))}
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 12 }}>
@@ -208,7 +238,7 @@ export default function App() {
                 <strong>{item.title}</strong>
                 <p style={{ color: colors.softInk }}>{item.situation}</p>
                 <p><em>{item.sample_phrase}</em></p>
-                <button onClick={() => loadScenario(item)} style={layout.buttonSoft}>Load scenario</button>
+                <button onClick={() => loadScenario(item)} style={layout.buttonSoft} aria-label={`Load scenario: ${item.title}`}>Load scenario</button>
               </article>
             ))}
           </div>
@@ -272,7 +302,7 @@ export default function App() {
             <button onClick={() => importInputRef.current?.click()} style={layout.buttonSoft}>Import JSON</button>
             <button onClick={clearReflections} disabled={reflections.length === 0} style={layout.buttonSoft}>Clear log</button>
           </div>
-          {importStatus && <p style={{ color: colors.softInk }}>{importStatus}</p>}
+          {importStatus && <p style={{ color: colors.softInk }} role="status" aria-live="polite">{importStatus}</p>}
           <div style={{ ...layout.stack, marginTop: 14 }}>
             {reflections.length === 0 ? <p>No saved reflections yet.</p> : reflections.map(item => (
               <article key={item.id} style={{ padding: 14, borderRadius: 16, background: colors.paper, border: `1px solid ${colors.softBorder}` }}>
@@ -289,7 +319,10 @@ export default function App() {
           <div style={layout.card}>
             <Eyebrow>Browse</Eyebrow>
             <h2>The 17 Mirror Sentences</h2>
-            <input value={search} onChange={event => setSearch(event.target.value)} placeholder="Search phrases or patterns" style={{ ...layout.field, marginBottom: 12 }} />
+            <label style={{ display: 'grid', gap: 8, marginBottom: 12 }}>
+              Search phrases or patterns
+              <input value={search} onChange={event => setSearch(event.target.value)} style={layout.field} />
+            </label>
             <div style={layout.stack}>
               {filtered.map(item => {
                 const realIndex = mirrorSentences.findIndex(card => card.id === item.id)
