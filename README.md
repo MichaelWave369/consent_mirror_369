@@ -20,6 +20,7 @@ It helps people notice when a request, offer, argument, or conversation feels ru
 - Printable card deck flow through the browser print dialog
 - Shared visual theme tokens
 - Mobile-friendly responsive layout
+- Accessibility notes and v1.0 release checklist
 - Framework docs
 - JSON data seeds for future app growth
 - GitHub Pages deployment workflow
@@ -56,6 +57,13 @@ The app includes practice scenarios that can be loaded into the analyzer and ref
 ## Printable deck
 
 The app includes a **Print / Save PDF deck** button. It opens the 17 Mirror Sentences as printable cards. Use the browser print dialog to print or choose **Save as PDF**.
+
+## v1.0 prep
+
+Before public launch, use:
+
+- `docs/V1_RELEASE_CHECKLIST.md`
+- `docs/ACCESSIBILITY_NOTES.md`
 
 ## GitHub Pages
 
@@ -94,7 +102,7 @@ src/        React prototype app
 
 ## Current status
 
-v0.9 prototype.
+v1.0-prep prototype.
 
 Completed:
 
@@ -108,15 +116,17 @@ Completed:
 - Added reflection export, import, and clear controls
 - Added printable card deck flow
 - Added shared theme tokens and responsive visual pass
+- Added accessibility notes
+- Added v1.0 release checklist
 - Added validation for JSON data
 - Added roadmap and contribution guide
 
 Next planned work:
 
 - Add card deck backs / visual identity
-- Add accessibility pass
 - Add duplicate detection for imported reflections
-- Prepare v1.0 release checklist
+- Run build/deploy verification
+- Prepare v1.0 public release notes
 
 ## Project vow
 
