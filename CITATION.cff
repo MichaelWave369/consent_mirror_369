@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+title: ConsentMirror369
+message: If you use ConsentMirror369, please cite it using the metadata from this file.
+type: software
+authors:
+  - family-names: Hughes
+    given-names: Michael W.
+    alias: MichaelWave369
+abstract: >-
+  ConsentMirror369 is a humane pressure-literacy and consent-awareness tool for recognizing pressure patterns, pausing before rushed decisions, and returning to clearer consent.
+version: 1.0.1
+date-released: 2026-05-31
+license: MIT
+repository-code: https://github.com/MichaelWave369/consent_mirror_369
+url: https://github.com/MichaelWave369/consent_mirror_369
+keywords:
+  - consent
+  - pressure-literacy
+  - reflection
+  - local-first
+  - safety-literacy
