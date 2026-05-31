@@ -1,0 +1,11 @@
+[
+  {"id":"guilt_pressure","name":"Guilt pressure","description":"Uses emotional debt or remorse to reduce clear choice."},
+  {"id":"urgency_pressure","name":"Urgency pressure","description":"Compresses time so reflection feels impossible."},
+  {"id":"identity_pressure","name":"Identity pressure","description":"Makes belonging, loyalty, faith, family, or worth feel conditional."},
+  {"id":"authority_pressure","name":"Authority pressure","description":"Uses status or certainty to discourage honest questions."},
+  {"id":"care_pressure","name":"Care pressure","description":"Uses concern or affection while reducing agency."},
+  {"id":"fear_pressure","name":"Fear pressure","description":"Uses future pain, regret, or threat to override reflection."},
+  {"id":"confusion_fog","name":"Confusion fog","description":"Uses contradiction, overload, or moving definitions to make clear thinking harder."},
+  {"id":"isolation_pressure","name":"Isolation pressure","description":"Cuts someone away from trusted outside support or perspective."},
+  {"id":"shame_pressure","name":"Shame pressure","description":"Attacks the person instead of discussing the decision."}
+]
