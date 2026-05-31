@@ -1,5 +1,7 @@
 # ConsentMirror369
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20479334.svg)](https://doi.org/10.5281/zenodo.20479334)
+
 **ConsentMirror369 is a humane pressure-literacy and consent-awareness project.**
 
 It helps people notice when a request, offer, argument, or conversation feels rushed, guilt-heavy, shaming, confusing, isolating, secretive, or emotionally loaded. The goal is not to judge anyone. The goal is to pause, reflect, ask better questions, and return to clear choice.
@@ -8,15 +10,21 @@ It helps people notice when a request, offer, argument, or conversation feels ru
 
 ## Official release
 
-**Latest release:** [ConsentMirror369 v1.0.0 — Lantern, Not Weapon](https://github.com/MichaelWave369/consent_mirror_369/releases/tag/v1.0.0)
+**Latest release:** [ConsentMirror369 v1.0.1 — Zenodo Metadata Release](https://github.com/MichaelWave369/consent_mirror_369/releases/tag/v1.0.1)
 
-**Status:** v1.0.1 metadata release prepared for Zenodo pickup.
+**DOI:** [10.5281/zenodo.20479334](https://doi.org/10.5281/zenodo.20479334)
 
-## Zenodo / DOI status
+**Status:** v1.0.1 archived on Zenodo.
 
-Zenodo DOI archival is prepared with `CITATION.cff` and `.zenodo.json` metadata.
+## Citation
 
-After the repository is enabled in Zenodo, publish a new GitHub release tagged `v1.0.1` so Zenodo can archive it and mint a DOI. Once Zenodo has archived the release and minted a DOI, add the DOI badge and citation link here.
+If you use or reference this project, please cite:
+
+```text
+Hughes, Michael W. (2026). ConsentMirror369 (v1.0.1). Zenodo. https://doi.org/10.5281/zenodo.20479334
+```
+
+Citation metadata is also available in `CITATION.cff`.
 
 ## What is included
 
@@ -141,7 +149,7 @@ src/        React prototype app
 
 ## Current status
 
-v1.0.1 metadata release prepared for Zenodo.
+v1.0.1 archived on Zenodo.
 
 Completed:
 
@@ -162,6 +170,7 @@ Completed:
 - Added v1.0.1 release notes
 - Added citation metadata
 - Added Zenodo metadata
+- Added Zenodo DOI badge and citation link
 - Added public launch post draft
 - Added changelog
 - Added release process docs
@@ -172,12 +181,13 @@ Completed:
 - Added validation for JSON data
 - Added roadmap and contribution guide
 - Published GitHub release v1.0.0
+- Published GitHub release v1.0.1
+- Archived release on Zenodo
 
 Next planned work:
 
-- Publish GitHub release `v1.0.1` after Zenodo is enabled
-- Confirm Zenodo archives the release and mints a DOI
-- Add Zenodo DOI badge after DOI is minted
+- Continue post-v1.0 polish and documentation
+- Add future feature releases as needed
 
 ## Project vow
 
