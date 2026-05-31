@@ -113,7 +113,7 @@ src/        React prototype app
 
 ## Current status
 
-v1.0.0-rc.1 release candidate prep.
+v1.0.0 ready.
 
 Completed:
 
@@ -129,8 +129,9 @@ Completed:
 - Added shared theme tokens and responsive visual pass
 - Added accessibility notes
 - Added v1.0 release checklist
-- Added v1.0 release notes draft
+- Added v1.0 release notes
 - Added public launch post draft
+- Added changelog
 - Added release process docs
 - Added `release:check` script
 - Added verification workflow
@@ -141,7 +142,7 @@ Next planned work:
 
 - Confirm GitHub Actions verification passes
 - Confirm GitHub Pages deploys
-- Prepare final v1.0 tag/release
+- Create final v1.0.0 GitHub release/tag
 
 ## Project vow
 
