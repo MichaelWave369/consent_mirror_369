@@ -6,6 +6,18 @@ It helps people notice when a request, offer, argument, or conversation feels ru
 
 > Pressure reduces choice. Clarity restores choice.
 
+## Official release
+
+**Latest release:** [ConsentMirror369 v1.0.0 — Lantern, Not Weapon](https://github.com/MichaelWave369/consent_mirror_369/releases/tag/v1.0.0)
+
+**Status:** v1.0.0 released.
+
+## Zenodo / DOI status
+
+Zenodo DOI archival is pending until the repository is connected and enabled in Zenodo.
+
+Once Zenodo has archived the release and minted a DOI, add the DOI badge and citation link here.
+
 ## What is included
 
 - A React and Vite prototype app
@@ -126,7 +138,7 @@ src/        React prototype app
 
 ## Current status
 
-v1.0.0 ready.
+v1.0.0 released.
 
 Completed:
 
@@ -153,12 +165,13 @@ Completed:
 - Added verification workflow
 - Added validation for JSON data
 - Added roadmap and contribution guide
+- Published GitHub release v1.0.0
 
 Next planned work:
 
-- Confirm GitHub Actions verification passes
-- Confirm GitHub Pages deploys
-- Create final v1.0.0 GitHub release/tag
+- Connect and archive through Zenodo
+- Add Zenodo DOI badge after DOI is minted
+- Continue post-v1.0 polish and documentation
 
 ## Project vow
 
