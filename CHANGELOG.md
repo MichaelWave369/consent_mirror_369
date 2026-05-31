@@ -19,6 +19,8 @@ First public release of ConsentMirror369.
 - Reflection JSON import
 - Duplicate-aware import handling
 - Printable 17-card teaching deck
+- Printable card backs with CM369 deck identity
+- Card deck visual identity notes
 - Shared visual theme tokens
 - Mobile-friendly responsive layout
 - Privacy model documentation
