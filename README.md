@@ -16,6 +16,8 @@ It helps people notice when a request, offer, argument, or conversation feels ru
 - Local-only reflection log using browser storage
 - Reflection export and import as JSON
 - Printable card deck flow through the browser print dialog
+- Shared visual theme tokens
+- Mobile-friendly responsive layout
 - Framework docs
 - JSON data seeds for future app growth
 - GitHub Pages deployment workflow
@@ -82,7 +84,7 @@ src/        React prototype app
 
 ## Current status
 
-v0.6 prototype.
+v0.7 prototype.
 
 Completed:
 
@@ -93,15 +95,16 @@ Completed:
 - Added local-only reflection log
 - Added reflection export, import, and clear controls
 - Added printable card deck flow
+- Added shared theme tokens and responsive visual pass
 - Added validation for JSON data
 - Added roadmap and contribution guide
 
 Next planned work:
 
-- Improve mobile layout and visual identity
 - Add examples for family, faith, workplace, online, sales, and relationships
 - Add guided response builder
 - Add card deck backs / visual identity
+- Add accessibility pass
 
 ## Project vow
 
