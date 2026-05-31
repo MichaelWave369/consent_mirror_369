@@ -17,6 +17,7 @@ It helps people notice when a request, offer, argument, or conversation feels ru
 - Boundary response examples
 - Local-only reflection log using browser storage
 - Reflection export and import as JSON
+- Duplicate-aware reflection imports
 - Printable card deck flow through the browser print dialog
 - Shared visual theme tokens
 - Mobile-friendly responsive layout
@@ -58,11 +59,13 @@ The app includes practice scenarios that can be loaded into the analyzer and ref
 
 The app includes a **Print / Save PDF deck** button. It opens the 17 Mirror Sentences as printable cards. Use the browser print dialog to print or choose **Save as PDF**.
 
-## v1.0 prep
+## v1.0 release docs
 
 Before public launch, use:
 
 - `docs/V1_RELEASE_CHECKLIST.md`
+- `docs/V1_RELEASE_NOTES.md`
+- `docs/PUBLIC_LAUNCH_POST.md`
 - `docs/ACCESSIBILITY_NOTES.md`
 
 ## GitHub Pages
@@ -102,7 +105,7 @@ src/        React prototype app
 
 ## Current status
 
-v1.0-prep prototype.
+v1.0 release candidate prep.
 
 Completed:
 
@@ -113,20 +116,21 @@ Completed:
 - Added real-world scenario examples and scenario browser
 - Added guided response builder
 - Added local-only reflection log
-- Added reflection export, import, and clear controls
+- Added reflection export, import, clear, and duplicate-skip controls
 - Added printable card deck flow
 - Added shared theme tokens and responsive visual pass
 - Added accessibility notes
 - Added v1.0 release checklist
+- Added v1.0 release notes draft
+- Added public launch post draft
 - Added validation for JSON data
 - Added roadmap and contribution guide
 
 Next planned work:
 
-- Add card deck backs / visual identity
-- Add duplicate detection for imported reflections
 - Run build/deploy verification
-- Prepare v1.0 public release notes
+- Add card deck backs / visual identity
+- Prepare final v1.0 tag/release
 
 ## Project vow
 
